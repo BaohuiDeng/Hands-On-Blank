@@ -44,7 +44,8 @@ def login():
 
         if login_user:
                             if bcrypt.hashpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
-                             return 'You are logged in as ' #login_user('username')
+                             l = login_user.save()
+                             return 'You are logged in as ' + l['username'] 
         return 'Invalid username/password combination'
     
 
