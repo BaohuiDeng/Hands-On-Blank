@@ -8,7 +8,7 @@ class RegisterForm(Form):
     username = StringField('Username')
     email = StringField('Email')
     password = PasswordField('Password')
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('Register')
 
 
 
