@@ -5,7 +5,7 @@ import bcrypt
 
 from document import User
 from login import LoginForm
-from forms import SignupForm
+from forms import RegisterForm
 import local_setings
 
 
@@ -54,7 +54,7 @@ def login():
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
-    form = SignupForm() #
+    form = RegisterForm() #
     if request.method =='POST':
         existing_user = User.objects.filter(username=request.form.get("username")).first()
         
