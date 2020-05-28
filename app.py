@@ -41,7 +41,7 @@ def login():
   
     
         if request.method == 'POST':
-               login_user = User.objects.get(username=request.form.get("username"))
+               login_user = User.objects.filter(username=request.form.get("username")).first()
 
         if login_user:
                             if bcrypt.hashpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
