@@ -46,7 +46,7 @@ def login():
         if login_user:
                             if bcrypt.hashpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
                              l = login_user.save()
-                             return 'You are logged in as ' + l['username'] 
+                             return '<h4>Welcome! You are logged in as </h4>' + l['username'] 
         return 'Invalid username/password combination'
     
 
@@ -56,16 +56,17 @@ def login():
 def signup():
     form = SignupForm() #
     if request.method =='POST':
-        existing_user = User.objects.get(username=request.form.get("username"))
-
+        existing_user = User.objects.filter(username=request.form.get("username")).first()
+        
 
         if existing_user is None:
             user = User(  #
-    username=request.form.get("username"),
-    email=request.form.get("email"),
-    password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
-    )
+            username=request.form.get("username"),
+            email=request.form.get("email"),
+            password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
+            )
             user.save()  
+            
             recipient = request.form['email'] #
             msg = Message('Group 2 Flaskpro presents', recipients=[recipient])
             msg.body = ('Welcome to Flask extensions')
