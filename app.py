@@ -17,9 +17,9 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] ='Dengbaohuilea@gmail.com'
+app.config['MAIL_USERNAME'] ='Your Email'
 app.config['MAIL_PASSWORD'] = local_setings.MAIL_PASSWORD 
-app.config['MAIL_DEFAULT_SENDER'] = 'Dengbaohuilea@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'Your Email'
 app.config['MAIL_MAX_EMAILS'] =  None
 app.config['MAIL_ASCII_ATTACHMENTS'] = False
 app.secret_key = 'development key'
@@ -27,7 +27,9 @@ app.secret_key = 'development key'
 mail = Mail (app)
 
 
-connect('HandsOnSession', host='localhost', port=27017) #
+#Task 2.3 start
+
+#Task 2.3 end
 
 @app.route('/')
 def index():
@@ -63,16 +65,22 @@ def signup():
         
 
         if existing_user is None:
-            user = User(  #
-            username=request.form.get("username"),
-            email=request.form.get("email"),
-            password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
-            )
+            
+            #Task 2.2 start
+            
+            #Task 2.2 end
+           # password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
+            #)
             user.save()  
             
-            recipient = request.form['email'] #
-            msg = Message('Welcome to Hands-on session', recipients=[recipient])
-            msg.body = ('Welcome to Flask part 2 Hands-on session')
+            #Task 3.1 start
+            
+            #Task 3.1 end
+            
+            #Task 3.2 start
+            
+            #Task 3.2 end
+            
             msg.html = ("<h2>Welcome! you have registered!</h2><b>\
             </b><br><h4>In this session you will learn more about Flask</h4>"
                 )
