@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request
-from forms import SignupForm
-from mongoengine import *
-from document import User
-import bcrypt
-from login import LoginForm
 from flask_mail import Mail, Message
+from mongoengine import *
+import bcrypt
+
+#uncommet this when finished Task 2.1
+# from document import User
+from login import LoginForm
+# uncomment this when finished Task 1.1 #
+#from forms import RegisterForm
 import local_setings
 
 
@@ -15,17 +18,19 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] ='Dengbaohuilea@gmail.com'
-app.config['MAIL_PASSWORD'] = local_setings.MAIL_PASSWORD # task1.1 #
-app.config['MAIL_DEFAULT_SENDER'] = 'Dengbaohuilea@gmail.com'
+app.config['MAIL_USERNAME'] ='your@gmail.com'
+app.config['MAIL_PASSWORD'] = local_setings.MAIL_PASSWORD 
+app.config['MAIL_DEFAULT_SENDER'] = 'your@gmail.com'
 app.config['MAIL_MAX_EMAILS'] =  None
 app.config['MAIL_ASCII_ATTACHMENTS'] = False
 app.secret_key = 'development key'
 
 mail = Mail (app)
 
+#Task 2.3 start
 
-connect('HandsOnSession', host='localhost', port=27017)
+
+#Task 2.3 end
 
 @app.route('/')
 def index():
@@ -40,11 +45,12 @@ def login():
   
     
         if request.method == 'POST':
-               login_user = User.objects.get(username=request.form.get("username"))
+               login_user = User.objects.filter(username=request.form.get("username")).first()
 
         if login_user:
                             if bcrypt.hashpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
-                             return 'You are logged in as ' #login_user('username')
+                             l = login_user.save()
+                             return '<h4>Welcome! You are logged in as </h4>' + l['username'] 
         return 'Invalid username/password combination'
     
 
@@ -52,24 +58,34 @@ def login():
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
-    form = SignupForm()
-    if request.method =='POST':
-        user = User(
-    username=request.form.get("username"),
-    email=request.form.get("email"),
-    password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
-    )
-        user.save()  
-        recipient = request.form['email']
-        msg = Message('Group 2 Flaskpro presents', recipients=[recipient])
-        msg.body = ('Welcome to Flask extensions')
-        msg.html = ("<h2>Dear students:</h2><b>Welcome to Flask extensions\
-        </b><br><h4>In this lecture you will learn knowlege about Flask</h4>"
-         )
-        mail.send(msg)
+     # Task 1.2 start
 
-        return 'you have successfully register, check your email!'
+    #Task 1.2 end
+    if request.method =='POST':
+        existing_user = User.objects.filter(username=request.form.get("username")).first()
+        
+
+        if existing_user is None:
+            #Task 2.2 start
+            
+            #password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
+            #)
+            #Task 2.2 end
+            
+            user.save()
+              
+            #Task 3.1 start
+
+            #Task 3.1 end
+            
+            return 'you have successfully registered, check your email!'
+        return 'That username already exists!'
     return render_template('signup.html',form=form)
+
+
+
+
+
 
 if __name__ =='__main__':
   app.run(debug=True)

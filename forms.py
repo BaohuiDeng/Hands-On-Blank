@@ -2,13 +2,9 @@ from flask_wtf import Form
 from wtforms import TextField, StringField, PasswordField, SubmitField
 
 
+# Task 1.1 start 
 
-class SignupForm(Form):
-    
-    username = StringField('Username')
-    email = StringField('Email')
-    password = PasswordField('Password')
-    submit = SubmitField('Register')
+# Task 1.1 end
 
 
 

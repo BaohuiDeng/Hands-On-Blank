@@ -1,1 +1,1 @@
-MAIL_PASSWORD = 'wherepeoplediet'
+MAIL_PASSWORD = 'your email password'
