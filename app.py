@@ -5,7 +5,8 @@ import bcrypt
 
 from document import User
 from login import LoginForm
-from forms import RegisterForm
+#uncommend this when finish task 1.1
+#from forms import RegisterForm
 import local_setings
 
 
