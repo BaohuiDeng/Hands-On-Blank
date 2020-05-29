@@ -2,10 +2,10 @@ from flask import Flask, render_template, request
 from flask_mail import Mail, Message
 from mongoengine import *
 import bcrypt
-
-from document import User
+#uncomment this when finish task 2.1
+#from document import User
 from login import LoginForm
-#uncommend this when finish task 1.1
+#uncomment this when finish task 1.1
 #from forms import RegisterForm
 import local_setings
 
@@ -55,7 +55,9 @@ def login():
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
-    form = RegisterForm() #
+
+    #Task 1.3 start
+    #Task 1.3 end
     if request.method =='POST':
         existing_user = User.objects.filter(username=request.form.get("username")).first()
         
