@@ -11,21 +11,28 @@
     
 
 
-<<<<<<< HEAD
 <h1>Register</h1>
-=======
-<h2>Register</h2>
->>>>>>> d215739b43a819c5863e31460a4f182d27dda5e8
 <form action="http://127.0.0.1:5000/signup" method = "post">
-   
-   
-    <!-- Task 1.2 start -->
 
+    <p>
+        {{form.username.label}}<br>
+        {{form.username(size=30)}}
+    </p>
 
+    <p>
+        {{form.email.label}}<br>
+        {{form.email(size=30)}}
+    </p>
 
-    <!-- Task 1.2 end -->
+    <p>
+        {{form.password.label}}<br>
+        {{form.password(size=30)}}
+    </p>
 
-   
+    <p>
+        <br>
+        {{form.submit()}}
+    </p>
 
 </form>
 <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css">
