@@ -77,9 +77,7 @@ def signup():
             
             #Task 3.1 end
             
-            #Task 3.2 start
-            
-            #Task 3.2 end
+         
             
             msg.html = ("<h2>Welcome! you have registered!</h2><b>\
             </b><br><h4>In this session you will learn more about Flask</h4>"
