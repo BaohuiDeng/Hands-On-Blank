@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_mail import Mail, Message
 from mongoengine import *
 import bcrypt
+from flask_pymongo import PyMongo 
 #uncomment this when finish task 2.1
 #from document import User
 from login import LoginForm
@@ -38,18 +39,25 @@ def index():
 
 
 
-
 @app.route('/login', methods=['POST'])
 def login():
-  
-    
-        if request.method == 'POST':
-               login_user = User.objects.filter(username=request.form.get("username")).first()
+        # Task 3.1 start 
 
-        if login_user:
-                            if bcrypt.checkpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')): 
-                                return '<h4>Welcome! You are logged in as </h4>' + login_user['username'] 
-        return 'Invalid username/password combination'
+
+        # Task 3.1 end
+
+
+        if request.method == 'POST':
+            # Task 3.2 start
+
+            # Task 3.2 end
+            
+            if login_user:
+                    if bcrypt.checkpw(request.form.get('password').encode('utf-8'), login_user['password'].encode('utf-8')): 
+                        session['username'] = request.form['username']
+                        return 'You are logged in as ' + session['username']
+
+            return 'Invalid username/password combination'
     
 
 
@@ -58,7 +66,9 @@ def login():
 def signup():
 
     #Task 1.3 start
+
     #Task 1.3 end
+
     if request.method =='POST':
         existing_user = User.objects.filter(username=request.form.get("username")).first()
         
@@ -68,16 +78,17 @@ def signup():
             #Task 2.2 start
             
             #Task 2.2 end
-           # password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
+
+            #password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
             #)
+
             user.save()  
             
-            #Task 3.1 start
+            # Task 3.1 start
             
-            #Task 3.1 end
+            # Task 3.1 end
             
          
-            
             msg.html = ("<h2>Welcome! you have registered!</h2><b>\
             </b><br><h4>In this session you will learn more about Flask</h4>"
                 )
