@@ -28,9 +28,9 @@ app.secret_key = 'development key'
 mail = Mail (app)
 
 
-#Task 2.3 start
+# Task 2.3 start
 
-#Task 2.3 end
+# Task 2.3 end
 
 @app.route('/')
 def index():
@@ -65,9 +65,9 @@ def login():
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
 
-    #Task 1.3 start
+    # Task 1.3 start
 
-    #Task 1.3 end
+    # Task 1.3 end
 
     if request.method =='POST':
         existing_user = User.objects.filter(username=request.form.get("username")).first()
@@ -75,18 +75,19 @@ def signup():
 
         if existing_user is None:
             
-            #Task 2.2 start
+            # Task 2.2 start
             
-            #Task 2.2 end
+            # Task 2.2 end
 
+            # uncomment this when finish Task 2.2
             #password=bcrypt.hashpw(request.form.get("password").encode('utf-8'),bcrypt.gensalt())
             #)
 
             user.save()  
             
-            # Task 3.1 start
+            # Task 3.3 start
             
-            # Task 3.1 end
+            # Task 3.3 end
             
          
             msg.html = ("<h2>Welcome! you have registered!</h2><b>\
