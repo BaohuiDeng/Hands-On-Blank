@@ -84,17 +84,19 @@ def signup():
             #)
 
             user.save()  
-            
+            return 'you have successfully registerted, email would not be sent since email and password not provided'
+
             # Task 3.3 start
             
             # Task 3.3 end
             
-         
-            msg.html = ("<h2>Welcome! you have registered!</h2><b>\
-            </b><br><h4>In this session you will learn more about Flask</h4>"
-                )
-            mail.send(msg)
-            return 'you have successfully registered, check your email!'
+            #  uncomment below when you have configured your Email accout and password to do Task 3.3  #
+            
+            #msg.html = ("<h2>Welcome! you have registered!</h2><b>\
+            #</b><br><h4>In this session you will learn more about Flask</h4>"
+             #   )
+            #mail.send(msg)
+            #return 'you have successfully registered, check your email!'
         return 'That username already exists!'
     return render_template('signup.html',form=form)
 
