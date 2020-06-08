@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session
 from flask_mail import Mail, Message
 from mongoengine import *
 import bcrypt
